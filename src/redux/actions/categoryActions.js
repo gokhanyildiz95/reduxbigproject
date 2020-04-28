@@ -5,7 +5,7 @@ export function changeCategory(category){
 }
 // kategorileri listelemek için
 export function getCategoriesSuccess(categories){
-    return {type:actionTypes.GET_CATEGORIES_SUCCES, payload:categories}
+    return {type:actionTypes.GET_CATEGORIES_SUCCESS, payload:categories}
 }
 export function getCategories(categories){
     return function(dispatch){

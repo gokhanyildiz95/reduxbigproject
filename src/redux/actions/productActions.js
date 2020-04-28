@@ -1,0 +1,15 @@
+import * as actionTypes from "./actionTypes"
+
+export function getProductsSuccess(products){
+    return {type:actionTypes.GET_PRODUCTS_SUCCESS, payload:products}
+}
+export function getProducts(products){
+    return function(dispatch){
+        //debugger; // action ın gelip glmediğini kontrol eder
+        let url = "http://localhost:3000/products"
+        return fetch(url).then(response=>response.json())
+        .then(result=>dispatch(getProductsSuccess(result)))
+        /*Her .then bir önceki .then in sonucunu döndürür yani
+        ilk .then deki response değeri, 2. .then e result olarak geçer*/
+    }
+}

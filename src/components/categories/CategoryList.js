@@ -12,6 +12,7 @@ class CategoryList extends Component {
   render() {
     return (
       <div>
+      <h3>Categort List</h3>
         <ListGroup>
           {this.props.categories.map((category) => (
             <ListGroupItem active={category.id===this.props.currentCategory.id?true:false} onClick={()=> this.props.actions.changeCategory(category)} key={category.id}>
@@ -30,7 +31,7 @@ class CategoryList extends Component {
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
-      //categoryaction dan bağlantı sağlar.
+      //categoryactions dan bağlantı sağlar.
       getCategories: bindActionCreators(categoryActions.getCategories,dispatch),
       changeCategory: bindActionCreators(categoryActions.changeCategory,dispatch)
     },
