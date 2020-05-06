@@ -1,15 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Badge } from "reactstrap";
+import { } from "reactstrap";
 import { bindActionCreators } from "redux";
 import * as productActions from "../../redux/actions/productActions";
-import { Table } from "reactstrap";
+import { Table ,Badge, Button  } from "reactstrap";
+import * as cartActions from "../../redux/actions/cartActions";
+
 
 class ProductList extends Component {
   componentDidMount() {
     this.props.actions.getProducts();
   }
+addToCart = (product) => {
+    this.props.actions.addToCart({quantity:1,product})
+}
   render() {
+      console.log(this.props.cartItem)
     return (
       <div>
         <h3>
@@ -28,17 +34,21 @@ class ProductList extends Component {
           <tbody>
             {this.props.products.map((product) => (
               <tr>
-                <th scope="row">{product.id}</th>
+                <th key={product.id} scope="row">{product.id}</th>
                 <td>{product.productName}</td>
                 <td>{product.quantityPerUnit}</td>
                 <td>{product.unitPrice}</td>
                 <td>{product.unitsInStock}</td>
+                <td><Button onClick={()=> this.addToCart(product)} >ekle</Button></td>
               </tr>
     ))}
           </tbody>
         </Table>
 
         <h1>{this.props.products.length}</h1>
+        <h3>{this.props.cartItem.length}</h3>
+        
+
       </div>
     );
   }
@@ -48,6 +58,7 @@ function mapDispatchToProps(dispatch) {
     actions: {
       //productactions dan bağlantı sağlar.
       getProducts: bindActionCreators(productActions.getProducts, dispatch),
+      addToCart: bindActionCreators(cartActions.addToCart,dispatch)
     },
   };
 }
@@ -55,6 +66,7 @@ function mapStateToProps(state) {
   return {
     currentCategory: state.changeCategoryReducer,
     products: state.productListReducer,
+    cartItem: state.cartReducer,
   };
 }
 

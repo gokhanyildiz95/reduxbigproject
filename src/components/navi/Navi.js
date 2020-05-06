@@ -8,6 +8,7 @@ import {
   NavItem,
   NavLink,
 } from "reactstrap";
+import CartSummary from '../cart/CartSummary'
 
 export default class Navi extends React.Component {
   constructor(props) {
@@ -42,6 +43,7 @@ export default class Navi extends React.Component {
                   GitHub
                 </NavLink>
               </NavItem>
+              <CartSummary/>
             </Nav>
           </Collapse>
         </Navbar>
